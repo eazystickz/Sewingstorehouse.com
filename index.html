@@ -571,10 +571,65 @@
                 <textarea class="form-control" name="message" rows="5" data-rule="required" data-msg="Please write something for us" placeholder="Message"></textarea>
                 <div class="validation"></div>
               </div>
-              <div class="text-center"><button type="submit">Send Message</button></div>
+              <div class="text-center"><button type="submit" onclick="setTimeout(showPopup, 3000); return false;" >Send Message</button></div>
             </form>
           </div>
         </div>
+
+        <!-- style  and script for the popup message -->
+        <style>
+          /* Style for the popup message */
+          .popup {
+            background-color: #ffffff;;
+            border: 1px solid #004AAD;;
+            border-radius: 5px;
+            box-shadow: 0 0 5px #999;
+            color: #000000;
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            padding: 40px 90px;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+          }
+
+          .close-btn {
+        background-color: #fff;
+        border: 1px solid #940303;
+        border-radius: 5px;
+        color: #940303;
+        font-family: Arial, sans-serif;
+        font-size: 16px;
+        padding: 5px 10px;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        cursor: pointer;
+      }
+        </style>
+        <script>
+          /* script for the popup message */
+          var popupTimeoutId; // Global variable to store the timeout ID
+
+        function showPopup() {
+        var popup = document.createElement('div');
+           popup.innerHTML = 'We have recieved your message. We would reach you  shortly with a response via the phone number you provided. Thank you (: <button onclick="hidePopup()" class="close-btn">OK</button>';
+           popup.classList.add('popup');
+           document.body.appendChild(popup);
+
+           popupTimeoutId = setTimeout(hidePopup, 9000); // Store the timeout ID in the global variable
+        }
+
+        function hidePopup() {
+        var popup = document.querySelector('.popup');
+           if (popup) {
+           popup.remove();
+           clearTimeout(popupTimeoutId); // Clear the timeout using the stored ID
+           }
+        }
+        </script>
 
       </div>
     </div>
